@@ -53,24 +53,24 @@ export default function App() {
 
   return (
     <ScrollView>
-      <View style={styles.container} onLayout={onLayout}>
+      <View style={styles.container}>
         {/* 1 */}
-        <View>
+        <View onLayout={onLayout}>
           <Animated.View
             style={{
               backgroundColor: myArrow1.interpolate({
                 inputRange: [0, 1],
-                outputRange: ['#eee', '#aaa'],
+                outputRange: ['#eee', '#bbb'],
               }),
             }}>
             <Pressable
               onPress={handlePress1}
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text style={[styles.accordion, {flex: 1}]}>Section 1</Text>
+              <Text style={[styles.titleText, {flex: 1}]}>Section 1</Text>
               <Animated.Text
                 style={[
-                  styles.accordion,
-                  styles.accordionAfter,
+                  styles.titleText,
+                  styles.titleArrow,
                   {
                     transform: [
                       {
@@ -101,9 +101,17 @@ export default function App() {
               1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
               do
             </Text>
+            <Text style={[styles.panelText, {paddingTop: 20}]}>
+              2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+              do
+            </Text>
+            <Text style={[styles.panelText, {paddingTop: 20}]}>
+              3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+              do
+            </Text>
             <Text
               style={[styles.panelText, {paddingTop: 20, paddingBottom: 20}]}>
-              2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+              4. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
               do
             </Text>
           </Animated.View>
@@ -114,8 +122,8 @@ export default function App() {
             <Pressable
               onPress={handlePress2}
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text style={[styles.accordion, {flex: 1}]}>Section 2</Text>
-              <Text style={[styles.accordion, styles.accordionAfter]}>
+              <Text style={[styles.titleText, {flex: 1}]}>Section 2</Text>
+              <Text style={[styles.titleText, styles.titleArrow]}>
                 {active2 ? '▲' : '▼'}
               </Text>
             </Pressable>
@@ -146,8 +154,8 @@ export default function App() {
             <Pressable
               onPress={handlePress3}
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text style={[styles.accordion, {flex: 1}]}>Section 3</Text>
-              <Text style={[styles.accordion, styles.accordionAfter]}>
+              <Text style={[styles.titleText, {flex: 1}]}>Section 3</Text>
+              <Text style={[styles.titleText, styles.titleArrow]}>
                 {active3 ? '▲' : '▼'}
               </Text>
             </Pressable>
@@ -178,13 +186,13 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 15,
   },
-  accordion: {
+  titleText: {
     fontSize: 20,
     color: '#444',
     padding: 18,
     textAlign: 'left',
   },
-  accordionAfter: {
+  titleArrow: {
     color: '#777',
     fontWeight: 'bold',
     marginRight: 5,
@@ -195,7 +203,6 @@ const styles = StyleSheet.create({
   panel: {
     paddingHorizontal: 18,
     backgroundColor: 'white',
-    overflow: 'hidden',
   },
   panelText: {
     fontSize: 18,
