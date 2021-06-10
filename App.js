@@ -1,5 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useCallback, useRef, useLayoutEffect} from 'react';
+import React, {
+  useState,
+  useCallback,
+  useRef,
+  useLayoutEffect,
+  useEffect,
+} from 'react';
 import {
   Text,
   View,
@@ -13,8 +19,6 @@ import {
 
 export default function App() {
   const [active1, setActive1] = useState(false);
-  const [active2, setActive2] = useState(false);
-  const [active3, setActive3] = useState(false);
 
   const [height, setHeight] = useState(0);
   const myArrow1 = useRef(new Animated.Value(0)).current;
@@ -25,36 +29,35 @@ export default function App() {
 
   const handlePress1 = () => {
     setActive1(prev => !prev);
+  };
+
+  useEffect(() => {
     if (active1) {
       Animated.timing(myArrow1, {
-        toValue: 0,
+        toValue: 1,
         duration: 250,
+        delay: 150,
         easing: Easing.ease,
       }).start();
     } else {
       Animated.timing(myArrow1, {
-        toValue: 1,
+        toValue: 0,
         duration: 250,
+        delay: 150,
         easing: Easing.ease,
       }).start();
     }
-  };
-  const handlePress2 = () => {
-    setActive2(prev => !prev);
-  };
-  const handlePress3 = () => {
-    setActive3(prev => !prev);
-  };
+  }, [active1, myArrow1]);
 
   const onLayout = useCallback(event => {
     event.persist();
-    setHeight(_ => event.nativeEvent.layout.height);
+    const {height: parentHeight} = event.nativeEvent.layout;
+    setHeight(_ => parentHeight);
   }, []);
 
   return (
     <ScrollView>
       <View style={styles.container} onLayout={onLayout}>
-        {/* 1 */}
         <Animated.View
           style={{
             backgroundColor: myArrow1.interpolate({
@@ -95,80 +98,25 @@ export default function App() {
               }),
             },
           ]}>
-          <Text style={styles.panelText}>
+          <Animated.Text style={[styles.panelText, {opacity: myArrow1}]}>
             1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          </Text>
-          <Text style={[styles.panelText, {paddingTop: 20}]}>
+          </Animated.Text>
+          <Animated.Text
+            style={[styles.panelText, {paddingTop: 20, opacity: myArrow1}]}>
             2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          </Text>
-          <Text style={[styles.panelText, {paddingTop: 20}]}>
+          </Animated.Text>
+          <Animated.Text
+            style={[styles.panelText, {paddingTop: 20, opacity: myArrow1}]}>
             3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          </Text>
-          <Text style={[styles.panelText, {paddingTop: 20, paddingBottom: 20}]}>
+          </Animated.Text>
+          <Animated.Text
+            style={[
+              styles.panelText,
+              {paddingTop: 20, paddingBottom: 20, opacity: myArrow1},
+            ]}>
             4. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          </Text>
+          </Animated.Text>
         </Animated.View>
-
-        {/* 2 */}
-        <View>
-          <View style={{backgroundColor: active2 ? '#ccc' : '#eee'}}>
-            <Pressable
-              onPress={handlePress2}
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text style={[styles.titleText, {flex: 1}]}>Section 2</Text>
-              <Text style={[styles.titleText, styles.titleArrow]}>
-                {active2 ? '▲' : '▼'}
-              </Text>
-            </Pressable>
-          </View>
-          <View style={[styles.panel, {maxHeight: active2 ? height : 0}]}>
-            <Text style={styles.panelText}>
-              1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-              do
-            </Text>
-            <Text style={[styles.panelText, {paddingTop: 20}]}>
-              2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-              do
-            </Text>
-            <Text style={[styles.panelText, {paddingTop: 20}]}>
-              3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-              do
-            </Text>
-            <Text
-              style={[styles.panelText, {paddingTop: 20, paddingBottom: 20}]}>
-              4. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-              do
-            </Text>
-          </View>
-        </View>
-        {/* 3 */}
-        <View>
-          <View style={{backgroundColor: active3 ? '#ccc' : '#eee'}}>
-            <Pressable
-              onPress={handlePress3}
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text style={[styles.titleText, {flex: 1}]}>Section 3</Text>
-              <Text style={[styles.titleText, styles.titleArrow]}>
-                {active3 ? '▲' : '▼'}
-              </Text>
-            </Pressable>
-          </View>
-          <View style={[styles.panel, {maxHeight: active3 ? height : 0}]}>
-            <Text style={styles.panelText}>
-              1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-              do
-            </Text>
-            <Text style={[styles.panelText, {paddingTop: 20}]}>
-              2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-              do
-            </Text>
-            <Text
-              style={[styles.panelText, {paddingTop: 20, paddingBottom: 20}]}>
-              3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-              do
-            </Text>
-          </View>
-        </View>
       </View>
     </ScrollView>
   );
