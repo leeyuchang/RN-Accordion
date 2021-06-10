@@ -53,69 +53,62 @@ export default function App() {
 
   return (
     <ScrollView>
-      <View style={styles.container}>
+      <View style={styles.container} onLayout={onLayout}>
         {/* 1 */}
-        <View onLayout={onLayout}>
-          <Animated.View
-            style={{
-              backgroundColor: myArrow1.interpolate({
+        <Animated.View
+          style={{
+            backgroundColor: myArrow1.interpolate({
+              inputRange: [0, 1],
+              outputRange: ['#eee', '#bbb'],
+            }),
+          }}>
+          <Pressable
+            onPress={handlePress1}
+            style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Text style={[styles.titleText, {flex: 1}]}>Section 1</Text>
+            <Animated.Text
+              style={[
+                styles.titleText,
+                styles.titleArrow,
+                {
+                  transform: [
+                    {
+                      rotate: myArrow1.interpolate({
+                        inputRange: [0, 0.5, 1],
+                        outputRange: ['180deg', '90deg', '0deg'],
+                      }),
+                    },
+                  ],
+                },
+              ]}>
+              {'▲'}
+            </Animated.Text>
+          </Pressable>
+        </Animated.View>
+        <Animated.View
+          style={[
+            styles.panel,
+            {
+              maxHeight: myArrow1.interpolate({
                 inputRange: [0, 1],
-                outputRange: ['#eee', '#bbb'],
+                outputRange: [0, height],
               }),
-            }}>
-            <Pressable
-              onPress={handlePress1}
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text style={[styles.titleText, {flex: 1}]}>Section 1</Text>
-              <Animated.Text
-                style={[
-                  styles.titleText,
-                  styles.titleArrow,
-                  {
-                    transform: [
-                      {
-                        rotate: myArrow1.interpolate({
-                          inputRange: [0, 0.5, 1],
-                          outputRange: ['180deg', '90deg', '0deg'],
-                        }),
-                      },
-                    ],
-                  },
-                ]}>
-                {'▲'}
-              </Animated.Text>
-            </Pressable>
-          </Animated.View>
-          <Animated.View
-            // style={[styles.panel, {maxHeight: active1 ? height : 0}]}>
-            style={[
-              styles.panel,
-              {
-                maxHeight: myArrow1.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0, height],
-                }),
-              },
-            ]}>
-            <Text style={styles.panelText}>
-              1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-              do
-            </Text>
-            <Text style={[styles.panelText, {paddingTop: 20}]}>
-              2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-              do
-            </Text>
-            <Text style={[styles.panelText, {paddingTop: 20}]}>
-              3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-              do
-            </Text>
-            <Text
-              style={[styles.panelText, {paddingTop: 20, paddingBottom: 20}]}>
-              4. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-              do
-            </Text>
-          </Animated.View>
-        </View>
+            },
+          ]}>
+          <Text style={styles.panelText}>
+            1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+          </Text>
+          <Text style={[styles.panelText, {paddingTop: 20}]}>
+            2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+          </Text>
+          <Text style={[styles.panelText, {paddingTop: 20}]}>
+            3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+          </Text>
+          <Text style={[styles.panelText, {paddingTop: 20, paddingBottom: 20}]}>
+            4. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+          </Text>
+        </Animated.View>
+
         {/* 2 */}
         <View>
           <View style={{backgroundColor: active2 ? '#ccc' : '#eee'}}>
