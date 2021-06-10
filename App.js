@@ -37,14 +37,14 @@ export default function App() {
         toValue: 1,
         duration: 250,
         delay: 150,
-        easing: Easing.ease,
+        easing: Easing.bezier(0.4, 0.0, 0.2, 1),
       }).start();
     } else {
       Animated.timing(myArrow1, {
         toValue: 0,
         duration: 250,
         delay: 150,
-        easing: Easing.ease,
+        easing: Easing.bezier(0.4, 0.0, 0.2, 1),
       }).start();
     }
   }, [active1, myArrow1]);
