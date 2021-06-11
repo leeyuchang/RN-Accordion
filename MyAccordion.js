@@ -129,11 +129,12 @@ const Item = ({item}) => {
           <Text
             style={{
               fontSize: 10,
-              borderWidth: 0.5,
+              borderWidth: 0.3,
+              overflow: 'hidden',
               borderRadius: 5,
               textAlign: 'center',
               textAlignVertical: 'center',
-              padding: 3,
+              paddingHorizontal: 6,
             }}
             onPress={() => {
               console.log('hell');

@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useLayoutEffect} from 'react';
-import {LogBox, View} from 'react-native';
+import {LogBox, ScrollView} from 'react-native';
 import MyAccordion from './MyAccordion';
 
 const DATA = [
@@ -86,10 +86,10 @@ export default function App() {
   }, []);
 
   return (
-    <View style={{padding: 15}}>
+    <ScrollView style={{padding: 15}}>
       {DATA.map(data => (
         <MyAccordion data={Object.values(data)} key={data[0]} />
       ))}
-    </View>
+    </ScrollView>
   );
 }
