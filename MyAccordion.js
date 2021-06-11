@@ -67,7 +67,7 @@ export default function MyAccordion(props) {
                 flex: 1,
                 color: myArrow.interpolate({
                   inputRange: [0, 1],
-                  outputRange: ['#222', '#eee'],
+                  outputRange: ['#222', '#fff'],
                 }),
               },
             ]}>
