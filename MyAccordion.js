@@ -19,9 +19,6 @@ export default function MyAccordion(props) {
     items: props.data[1],
   });
 
-  console.log('props', props.data);
-  console.log('myDataRef', myDataRef.current);
-
   useEffect(() => {
     if (expand) {
       Animated.timing(myArrow, {
