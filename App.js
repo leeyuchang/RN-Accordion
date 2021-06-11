@@ -86,7 +86,9 @@ export default function App() {
   }, []);
 
   return (
-    <ScrollView style={{padding: 15}}>
+    <ScrollView
+      // scrollEnabled
+      contentContainerStyle={{padding: 15}}>
       {DATA.map(data => (
         <MyAccordion data={Object.values(data)} key={data[0]} />
       ))}

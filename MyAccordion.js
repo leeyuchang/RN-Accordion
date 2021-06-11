@@ -50,8 +50,8 @@ export default function MyAccordion(props) {
       <Animated.View
         style={{
           backgroundColor: myArrow.interpolate({
-            inputRange: [0, 1],
-            outputRange: ['#eee', '#bbb'],
+            inputRange: [0, 0.5, 1],
+            outputRange: ['#eee', '#ddd', '#bbb'],
           }),
         }}>
         <Pressable
@@ -60,9 +60,19 @@ export default function MyAccordion(props) {
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}>
-          <Text style={[styles.titleText, {flex: 1}]}>
+          <Animated.Text
+            style={[
+              styles.titleText,
+              {
+                flex: 1,
+                color: myArrow.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: ['#222', '#eee'],
+                }),
+              },
+            ]}>
             {myDataRef.current.category}
-          </Text>
+          </Animated.Text>
           <Animated.Text
             style={[
               styles.titleText,
