@@ -92,13 +92,59 @@ export default function MyAccordion(props) {
             }),
           },
         ]}>
-        <Animated.Text style={[styles.panelText, {opacity: myArrow}]}>
-          {myDataRef.current.items.map(item => item.name)}
-        </Animated.Text>
+        <View
+          style={[
+            styles.panelText,
+            {
+              width: '100%',
+            },
+          ]}>
+          {myDataRef.current.items.map(item => (
+            <Item item={item} key={item._id} />
+          ))}
+        </View>
       </Animated.View>
     </View>
   );
 }
+
+const Item = ({item}) => {
+  return (
+    <View
+      style={{
+        paddingVertical: 5,
+        // borderWidth: 1,
+        flexDirection: 'column',
+      }}>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}>
+        <View style={{flexDirection: 'column', flex: 0.89}}>
+          <Text style={[styles.title]}>{item.name}</Text>
+          <Text style={[styles.price]}>${item.price.toFixed(2)}</Text>
+        </View>
+        <View style={{flex: 0.11}}>
+          <Text
+            style={{
+              fontSize: 10,
+              borderWidth: 0.5,
+              borderRadius: 5,
+              textAlign: 'center',
+              textAlignVertical: 'center',
+              padding: 3,
+            }}
+            onPress={() => {
+              console.log('hell');
+            }}>
+            Add to{'\n'}Cart
+          </Text>
+        </View>
+      </View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   titleText: {
@@ -116,15 +162,51 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc',
   },
   panel: {
-    paddingHorizontal: 18,
+    paddingLeft: 18,
     backgroundColor: 'white',
   },
   panelText: {
-    fontSize: 18,
-    lineHeight: 25,
+    fontSize: 14,
   },
   separator: {
     borderWidth: 1,
     borderColor: '#222',
+  },
+  contentContainer: {
+    flex: 1,
+  },
+  // =========== WORKING ON IT
+  title: {
+    // color: AppStyles.colorSet[colorScheme].mainTextColor,
+    // fontFamily: AppStyles.fontFamily.semiBoldFont,
+    // fontSize: AppStyles.fontSet.middle,
+    // paddingLeft: 10,
+    textAlignVertical: 'bottom',
+  },
+  price: {
+    // color: AppStyles.colorSet[colorScheme].mainTextColor,
+    // fontFamily: AppStyles.fontFamily.boldFont,
+    // fontSize: AppStyles.fontSet.middle,
+    // paddingLeft: 10,
+    textAlignVertical: 'top',
+  },
+  selectCart: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 0.2,
+    borderRadius: 10,
+    color: '#888',
+  },
+  selectCartText: {
+    fontSize: 14,
+    // color: AppStyles.colorSet[colorScheme].mainTextColor,
+    borderWidth: 0.5,
+    borderRadius: 5,
+    padding: 10,
+    height: 75,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    // marginRight: 10,
   },
 });
