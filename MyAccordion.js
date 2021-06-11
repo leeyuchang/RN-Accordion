@@ -81,8 +81,9 @@ export default function MyAccordion(props) {
                 transform: [
                   {
                     rotate: myArrow.interpolate({
-                      inputRange: [0, 0.5, 1],
-                      outputRange: ['180deg', '90deg', '0deg'],
+                      inputRange: [0, 1],
+                      // outputRange: ['180deg', '90deg', '0deg'],
+                      outputRange: ['0rad', `${Math.PI}rad`],
                     }),
                   },
                 ],
